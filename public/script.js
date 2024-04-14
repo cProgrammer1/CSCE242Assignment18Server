@@ -28,16 +28,13 @@ const getCrafts = async() =>
     {
         // let response = await fetch("http://localhost:3000/api/crafts");
         // let response = await fetch("https://csce242assignment17server.onrender.com/api/crafts");
-        let response = (await fetch("api/crafts/")).json();
-
-
-        return await response.json();
+        return (await fetch("api/crafts/")).json();
 
     }
     catch(error)
     {
         console.log(error);
-        errorPrompt(result.error);
+        // errorPrompt(result.error);
 
 
         return "";
@@ -550,7 +547,7 @@ const resetCraftForm = () =>
 
 };
 
-const addCraft = async(event) =>
+const addCraft = async (event) =>
 {
     event.preventDefault();
 
@@ -562,8 +559,9 @@ const addCraft = async(event) =>
 
     console.log(...addCraftFormData);
 
+    // If adding craft 
     if(addCraftForm._id.value.trim() == "")
-    {
+    {   
         console.log("Adding craft (POST)")
 
         response = await fetch("/api/crafts", 
@@ -574,6 +572,7 @@ const addCraft = async(event) =>
         });
 
     }
+    // If editing craft 
     else
     {
         console.log("Editing craft (PUT)");
@@ -592,7 +591,7 @@ const addCraft = async(event) =>
     if(response.status != 200)
     {
         console.log("Error adding or editing craft data");
-        errorPrompt(result.error);
+        // errorPrompt(result.error);
 
 
         return;
@@ -600,7 +599,7 @@ const addCraft = async(event) =>
     }
 
 
-    response = await response.json();
+    await response.json();
     resetCraftForm();
     document.getElementById("crafts-modal").style.display = "none";
 
@@ -641,7 +640,7 @@ deleteCraftPrompt = (craft) =>
 
 }
 
-const deleteCraft = async(craft) =>
+const deleteCraft = async (craft) =>
 {    
     let response = await fetch(`/api/crafts/${craft._id}`,
     {
@@ -656,9 +655,9 @@ const deleteCraft = async(craft) =>
     if(response.status != 200)
     {
         console.log("There was an error deleting the craft");
-        errorPrompt(result.error);
+        // errorPrompt(result.error);
 
-        
+
         return;
 
     }
