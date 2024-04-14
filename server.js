@@ -102,6 +102,7 @@ app.get("/", (request, response) =>
 });
 
 
+// Retrieves crafts from MongoDB database 
 const getCrafts = async (response) =>
 {
     const crafts = await Craft.find();
@@ -109,7 +110,6 @@ const getCrafts = async (response) =>
     response.send(crafts);
 
 }
-
 
 // GET from /api/crafts 
 app.get("/api/crafts", (request, response) => 
@@ -130,9 +130,8 @@ app.get("/api/crafts/:id", async (request, response) =>
 
     const craftID = request.params.id;
 
-    const craft = await Craft.findOne({_id:id});
+    const craft = await Craft.findOne({_id:craftID});
 
-    
     response.send(craft);
 
 });
@@ -179,7 +178,6 @@ app.post("/api/crafts", upload.single("image_input"), async (request, response) 
     const saveCraft = await newCraft.save();
 
     console.log("New craft added: ", newCraft);
-    crafts.push(newCraft);
 
     response.send(newCraft);
   
@@ -226,7 +224,7 @@ app.put("/api/crafts/:id", upload.single("image_input"), async (request, respons
     const craftID = request.params.id;
 
     // Creates new variable "deleteCraft" equal to given craft with updated information 
-    const updateCraftResult = await Craft.updateOne({_id:id}, craftFieldsToUpdate);
+    const updateCraftResult = await Craft.updateOne({_id:craftID}, craftFieldsToUpdate);
 
     response.send(updateCraftResult);
 
