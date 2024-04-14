@@ -1,0 +1,156 @@
+<!--
+    Created by Chrissy Dobrowolski 
+    Assignment 18- Server CRUD with MongoDB (copied over from Assignment 17) 
+    CSCE 242- 001 
+    Due: 4.14.2024 
+
+-->
+
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title>Assignment 18- Server CRUD with MongoDB</title>
+        <!-- Resource: https://www.w3schools.com/w3css/4/w3.css; linked on Dropbox-->
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+        <link rel="stylesheet" href="styles.css" />
+
+    </head>
+
+    <body>
+
+        <header>
+            <h1>Buy and Sell Crafts</h1>
+            <h1 id="plus-sign-add-craft"><a href="#">+</a></h1>
+
+        </header>
+
+        <!-- <h3>Testing</h3> -->
+        <div id="crafts"></div>
+
+        <!-- <p>Plus sign image by <a href="https://pixabay.com/users/michael-kouassi-4074806/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1923369">michael-kouassi</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1923369">Pixabay</a></p> -->
+        <!-- <p>Edit pencil image by <a href="https://pixabay.com/users/openclipart-vectors-30363/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=160872">OpenClipart-Vectors</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=160872">Pixabay</a></p> -->
+
+
+
+        <!-- Modal (ORIGINAL SOURCE: https://www.w3schools.com/w3css/w3css_modal.asp) -->
+        <div id="crafts-modal" class="w3-modal" >
+
+            <div class="w3-modal-content">
+                
+                <div class="w3-container">
+
+                    <span id="modal-close" class="w3-button w3-display-topright">&times;</span>
+
+                    <section id="modal-content">
+
+                        <form id="add-craft-form" method="post" class="hidden">
+
+                            <section id="add-craft-form-flex">
+
+                                <section class="craft-form-image-section">
+
+                                    <input type="hidden" id="_id" name="_id">
+
+                                    <p id="image-preview-section">
+                                        <img id="image-preview">
+
+                                    </p>
+
+                                    <p>
+                                        <img src="https://place-hold.it/200x300" id="placeholder-preview-image" class="block" alt="Placeholder image">
+                                        
+                                        <label for="image_input" id="image-input-label" class="inline">Select an Image</label>
+                                        <input type="file" id="image_input" name="image_input" accept="image/*"/>
+
+                                    </p>
+
+                                </section>
+
+                                <section class="craft-form-text-section">
+
+                                    <h3>Add a New Craft or Make Changes to a Craft</h3>
+
+                                    <p>
+                                        <label for="name_input" class="inline">Name:</label>
+                                        <input type="text" id="name_input" name="name_input" placeholder="Min: 3 characters" required/>
+
+                                    </p>
+
+                                    <p>
+                                        <label for="description" class="inline">Description:</label>
+                                        <input type="text" id="description_input" name="description_input" placeholder="Min: 3 characters" required/>
+
+                                    </p>
+
+                                    <p id="supplies-p">
+                                        <label class="inline">Supplies:</label>
+                                        <!-- <input type="text" id="supply_input" name="supply_input"/> -->
+                                        <a href="#" id="add-supply-click">Add Supply</a>
+                                        <!-- <button id="add-supply-button" class="inline">Add Supply</button> -->
+                                        
+                                        <section id="supplies-section"></section>
+
+                                    </p>
+
+                                    <button id="cancel-add-craft-button">Cancel</button>
+                                    <button id="save-craft-button" type="submit">Save</button>
+
+                                </section>
+
+                            </section>
+                        
+                        </form>
+
+                        <section id="expanded-image-info-section" class="hidden">
+                            <section id="expanded-image-section" class="flex-columns"></section>
+                            <section id="expanded-info-section" class="flex-columns"></section>
+                            
+                            <section id="delete-prompt" class="hidden"></section>
+                            <section id="error-prompt" class="hidden"></section>
+
+                        </section>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <script src="script.js"></script>
+
+    </body>
+
+</html>
+
+
+
+<!-- 
+
+- NOTES: 
+    - Resources: 
+        - https://www.w3schools.com/w3css/4/w3.css 
+        - https://www.w3schools.com/js/js_loop_for.asp 
+        - https://www.w3schools.com/jsref/met_document_queryselector.asp 
+        - https://www.geeksforgeeks.org/how-to-set-space-between-the-flexbox/ 
+        - https://www.w3schools.com/html/html_lists_unordered.asp 
+
+        - https://stackoverflow.com/questions/55925522/what-is-cb-in-multer 
+        - https://stackoverflow.com/questions/5617703/background-color-in-input-and-text-fields 
+        - https://stackoverflow.com/questions/70780973/404-error-with-post-request-using-express-server 
+        - https://stackoverflow.com/questions/38500637/500-in-post-request 
+        - https://maximorlov.com/fix-unexpected-field-error-multer/ (SOLVED MULTER FIELD NOT FOUND ERROR)
+        - https://www.w3schools.com/html/html_form_attributes.asp 
+        - https://kinsta.com/blog/500-internal-server-error/#3-check-your-server-logs 
+        - https://stackoverflow.com/questions/49897639/how-to-allow-any-other-key-in-joi 
+        - https://www.w3schools.com/jsref/jsref_trim_string.asp 
+        - https://stackoverflow.com/questions/43362431/uncaught-in-promise-syntaxerror-unexpected-end-of-json-input 
+        - https://stackoverflow.com/questions/5765398/whats-the-best-way-to-convert-a-number-to-a-string-in-javascript 
+
+-->

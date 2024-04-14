@@ -1,0 +1,339 @@
+/* 
+    Created by Chrissy Dobrowolski 
+    Assignment 18- Server CRUD with MongoDB (copied over from Assignment 17) 
+    CSCE 242- 001 
+    Due: 4.14.2024 
+
+*/
+
+
+/* FOR ALL RESOLUTIONS: */
+
+*
+{
+    box-sizing: border-box;
+
+}
+
+body
+{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+h1
+{
+    display: inline;
+    margin-left: 10px;
+    
+}
+
+h1 a
+{
+    text-decoration: none;
+    margin-left: 5px;
+    
+}
+
+.plus-sign-image
+{
+    max-width: 2%;
+    margin-left: 30px;
+    
+}
+
+#edit-pencil-image
+{
+    max-width: 3.5%;
+    margin-left: 12px;
+    
+}
+
+#delete-x-link
+{
+    margin-left: 5px;
+
+}
+
+.ferris-wheel-image
+{
+    max-width: 90%;
+
+}
+
+.expanded-ferris-wheel-image
+{
+    max-width: 90%;
+
+}
+
+p
+{
+    margin-left: 10px;
+
+}
+
+p a
+{
+    text-decoration: none;
+    color: #5f4e96;
+
+}
+
+
+.modal
+{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #d2d2d2;
+    background-color: #d2d2d285;
+
+}
+
+#modal-content
+{
+    display: flex;
+
+}
+
+.expanded-craft-image
+{
+    margin: 10px;
+    margin-right: 20px;
+
+}
+
+.close
+{
+    color: #d6d6d6;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+
+}
+
+.close:hover,
+.close:focus
+{
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+
+}
+
+#expanded-image-info-section,
+#add-craft-form-flex
+{
+    display: flex;
+
+}
+
+.inline
+{
+    display: inline;
+
+}
+
+.hidden
+{
+    display: none;
+
+}
+
+.block
+{
+    display: block;
+
+}
+
+.initial-image-preview
+{
+    padding: 10px;
+    display: block;
+    max-width: 80%;
+
+}
+
+#image-preview
+{
+    padding: 10px;
+    display: block;
+    max-width: 100%;
+
+}
+
+
+.crafts-container
+{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+
+}
+
+.craft-section0,
+.craft-section1,
+.craft-section2,
+.craft-section3,
+.craft-form-image-section
+{
+    flex: 25%;
+    max-width: 25%;
+    padding: 0 4px;
+
+}
+
+.craft-form-text-section
+{
+    margin-left: 75px;
+
+}
+
+.supply
+{
+    margin-bottom: 10px;
+
+}
+
+#name_input,
+#supplies_input
+{
+    padding-right: 70px;
+
+}
+
+#description_input
+{
+    padding-bottom: 30px;
+    padding-right: 250px;
+
+}
+
+
+.craft-section0 img,
+.craft-section1 img,
+.craft-section2 img,
+.craft-section3 img
+{
+    margin-top: 8px;
+    vertical-align: middle;
+    padding: 0px;
+
+}
+
+
+/* - Add Supply Form: */
+
+label
+{
+    font-size: 20px;
+
+}
+
+#add-supply-click,
+#cancel-add-craft-button,
+#save-craft-button,
+#image-input-label,
+#yes-delete-button,
+#no-delete-button
+{
+    color: #EEE2F2;
+    font-size: 16px;
+    background-color: #4B0082;
+    padding: 7px;
+
+}
+
+#delete-prompt
+{
+    height: 150px;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 30px;
+    background-color: #e9d5f7;
+
+}
+
+#error-prompt
+{
+    height: 150px;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 30px;
+    background-color: #f7b5b5;
+
+}
+
+#no-delete-button
+{
+    margin-left: 7px;
+
+}
+
+input[type="text"]
+{
+    background-color: #EDE6F3;
+
+}
+
+input[type="file"]
+{
+    display: none;
+
+}
+
+#placeholder-preview-image
+{
+    margin-bottom: 15px;
+
+}
+
+#cancel-add-craft-button
+{
+    margin-bottom: 15px;
+
+}
+
+
+
+
+/* OVERRIDE: FOR LARGER RESOLUTIONS: */
+
+@media (max-width: 1220px)
+{
+    .craft-section0,
+    .craft-section1,
+    .craft-section2,
+    .craft-section3
+    {
+        flex: 50%;
+        max-width: 50%;
+
+    }
+
+}
+
+@media (max-width: 615px)
+{
+    .craft-section0,
+    .craft-section1,
+    .craft-section2,
+    .craft-section3
+    {
+        flex: 100%;
+        max-width: 100%;
+
+    }
+
+}
