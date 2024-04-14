@@ -27,8 +27,8 @@ const getCrafts = async() =>
     try
     {
         // let response = await fetch("http://localhost:3000/api/crafts");
-        // let response = await fetch("https://csce242assignment18server.onrender.com/api/crafts");
-        return (await fetch("api/crafts/")).json();
+        let response = await fetch("https://csce242assignment18server.onrender.com/api/crafts");
+        // return (await fetch("api/crafts/")).json();
 
     }
     catch(error)
