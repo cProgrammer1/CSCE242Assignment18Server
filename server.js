@@ -82,7 +82,7 @@ const craftSchema = new mongoose.Schema
     supplies: [String],
     image: String,
 
-}, {_id: false});
+});
 
 // Creates new Object "Craft" with schema craftSchema 
 const Craft = mongoose.model("Craft", craftSchema);
