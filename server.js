@@ -77,13 +77,12 @@ mongoose
 // Creates new schema (format for parameters) for crafts 
 const craftSchema = new mongoose.Schema
 ({
-    _id: Number,
     name: String,
     description: String,
     supplies: [String],
-    image: String
+    image: String,
 
-});
+}, {_id: false});
 
 // Creates new Object "Craft" with schema craftSchema 
 const Craft = mongoose.model("Craft", craftSchema);
