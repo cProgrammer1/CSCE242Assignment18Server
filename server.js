@@ -78,6 +78,7 @@ mongoose
 // Creates new schema (format for parameters) for crafts 
 const craftSchema = new mongoose.Schema
 ({
+    id: Number,
     name: String,
     description: String,
     supplies: [String],
