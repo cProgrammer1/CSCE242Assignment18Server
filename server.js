@@ -38,6 +38,7 @@ const cors = require("cors");
 app.use(cors());
 
 const mongoose = require("mongoose");
+const { ObjectId } = require("mongodb");
 
 const storage = multer.diskStorage
 ({
@@ -161,7 +162,7 @@ app.post("/api/crafts", upload.single("image_input"), async (request, response) 
     const newCraft = new Craft
     ({
         // _id: crafts.length,
-        _id: new mongoose.Types.ObjectId().toHexString(),
+        _id: ObjectId(request.params.id),
         name: request.body.name_input,
         description: request.body.description_input,
         supplies: request.body.supplies.split(",") // Splits comma-separated items in array 
