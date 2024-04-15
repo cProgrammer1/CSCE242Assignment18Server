@@ -131,6 +131,7 @@ app.get("/api/crafts/:id", async (request, response) =>
     console.log("API with ID requested");
 
     const craftID = request.params.id;
+    console.log("craftID: ", craftID);
 
     const craft = await Craft.findOne({_id:craftID});
 
@@ -163,7 +164,7 @@ app.post("/api/crafts", upload.single("image_input"), async (request, response) 
     const newCraft = new Craft
     ({
         // _id: crafts.length,
-        _id: ObjectId(request.params.id.toString()),
+        _id: request.params.id.toString(),
         name: request.body.name_input,
         description: request.body.description_input,
         supplies: request.body.supplies.split(",") // Splits comma-separated items in array 
