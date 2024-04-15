@@ -94,11 +94,13 @@ const showCrafts = async() =>
 
     for(let i=0; i<craftsJSON.length; i++)
     {
+        const craft = craftsJSON[i];
+
         // If craft ID has a remainder of 0 when divided by 4, places the craft in the section section (craftSection0) 
         if(i % 4 == 0)
         {
             const craftImage = document.createElement("img");
-            craftImage.src = "images/" + craftsJSON[i].image;
+            craftImage.src = "images/" + craft.image;
             craftImage.classList.add("initial-image-preview");
 
             // Appends to craftSection0 
@@ -117,7 +119,7 @@ const showCrafts = async() =>
 
                 const expandedCraftNameh3 = document.createElement("h2");
                 expandedCraftNameh3.classList.add("inline");
-                expandedCraftNameh3.innerHTML = craftsJSON[i].name;
+                expandedCraftNameh3.innerHTML = craft.name;
                 expandedInfoSection.append(expandedCraftNameh3);
 
                 const editPencilLink = document.createElement("a");
@@ -131,7 +133,7 @@ const showCrafts = async() =>
                 deleteXLink.id = "delete-x-link";
 
                 const expandedCraftDescriptionP = document.createElement("p");
-                expandedCraftDescriptionP.innerHTML = craftsJSON[i].description;
+                expandedCraftDescriptionP.innerHTML = craft.description;
                 expandedInfoSection.append(expandedCraftDescriptionP);
 
                 const expandedCraftSuppliesTitle = document.createElement("h3")
@@ -140,11 +142,11 @@ const showCrafts = async() =>
 
                 const expandedCraftSuppliesUl = document.createElement("ul");
                 
-                for(let i=0; i<craftsJSON[i].supplies.length; i++)
+                for(let i=0; i<craft.supplies.length; i++)
                 {
                     const expandedCraftSuppliesP = document.createElement("li");
 
-                    expandedCraftSuppliesP.append(craftsJSON[i].supplies[i]);
+                    expandedCraftSuppliesP.append(craft.supplies[i]);
                     
                     expandedCraftSuppliesUl.append(expandedCraftSuppliesP);
                     
@@ -158,7 +160,7 @@ const showCrafts = async() =>
 
                 const expandedImage = document.createElement("img");
                 expandedImage.classList.add("expanded-craft-image");
-                expandedImage.src = "images/" + craftsJSON[i].image;
+                expandedImage.src = "images/" + craft.image;
                 expandedImageSection.append(expandedImage);
 
                 editPencilLink.onclick = showAddCraftForm;
@@ -182,7 +184,7 @@ const showCrafts = async() =>
         if(i % 4 == 1)
         {
             const craftImage = document.createElement("img");
-            craftImage.src = "images/" + craftsJSON[i].image;
+            craftImage.src = "images/" + craft.image;
             craftImage.classList.add("initial-image-preview");
 
             // Appends to craftSection1 
@@ -201,7 +203,7 @@ const showCrafts = async() =>
 
                 const expandedCraftNameh3 = document.createElement("h2");
                 expandedCraftNameh3.classList.add("inline");
-                expandedCraftNameh3.innerHTML = craftsJSON[i].name;
+                expandedCraftNameh3.innerHTML = craft.name;
                 expandedInfoSection.append(expandedCraftNameh3);
 
                 const editPencilLink = document.createElement("a");
@@ -215,7 +217,7 @@ const showCrafts = async() =>
                 deleteXLink.id = "delete-x-link";
 
                 const expandedCraftDescriptionP = document.createElement("p");
-                expandedCraftDescriptionP.innerHTML = craftsJSON[i].description;
+                expandedCraftDescriptionP.innerHTML = craft.description;
                 expandedInfoSection.append(expandedCraftDescriptionP);
 
                 const expandedCraftSuppliesTitle = document.createElement("h3")
@@ -224,11 +226,11 @@ const showCrafts = async() =>
 
                 const expandedCraftSuppliesUl = document.createElement("ul");
                 
-                for(let i=0; i<craftsJSON[i].supplies.length; i++)
+                for(let i=0; i<craft.supplies.length; i++)
                 {
                     const expandedCraftSuppliesP = document.createElement("li");
 
-                    expandedCraftSuppliesP.append(craftsJSON[i].supplies[i]);
+                    expandedCraftSuppliesP.append(craft.supplies[i]);
                     
                     expandedCraftSuppliesUl.append(expandedCraftSuppliesP);
                     
@@ -242,7 +244,7 @@ const showCrafts = async() =>
 
                 const expandedImage = document.createElement("img");
                 expandedImage.classList.add("expanded-craft-image");
-                expandedImage.src = "images/" + craftsJSON[i].image;
+                expandedImage.src = "images/" + craft.image;
                 expandedImageSection.append(expandedImage);
 
                 editPencilLink.onclick = showAddCraftForm;
@@ -266,7 +268,7 @@ const showCrafts = async() =>
         if(i % 4 == 2)
         {
             const craftImage = document.createElement("img");
-            craftImage.src = "images/" + craftsJSON[i].image;
+            craftImage.src = "images/" + craft.image;
             craftImage.classList.add("initial-image-preview");
 
             // Appends to craftSection1 
@@ -285,7 +287,7 @@ const showCrafts = async() =>
 
                 const expandedCraftNameh3 = document.createElement("h2");
                 expandedCraftNameh3.classList.add("inline");
-                expandedCraftNameh3.innerHTML = craftsJSON[i].name;
+                expandedCraftNameh3.innerHTML = craft.name;
                 expandedInfoSection.append(expandedCraftNameh3);
 
                 const editPencilLink = document.createElement("a");
@@ -299,7 +301,7 @@ const showCrafts = async() =>
                 deleteXLink.id = "delete-x-link";
 
                 const expandedCraftDescriptionP = document.createElement("p");
-                expandedCraftDescriptionP.innerHTML = craftsJSON[i].description;
+                expandedCraftDescriptionP.innerHTML = craft.description;
                 expandedInfoSection.append(expandedCraftDescriptionP);
 
                 const expandedCraftSuppliesTitle = document.createElement("h3")
@@ -308,11 +310,11 @@ const showCrafts = async() =>
 
                 const expandedCraftSuppliesUl = document.createElement("ul");
                 
-                for(let i=0; i<craftsJSON[i].supplies.length; i++)
+                for(let i=0; i<craft.supplies.length; i++)
                 {
                     const expandedCraftSuppliesP = document.createElement("li");
 
-                    expandedCraftSuppliesP.append(craftsJSON[i].supplies[i]);
+                    expandedCraftSuppliesP.append(craft.supplies[i]);
                     
                     expandedCraftSuppliesUl.append(expandedCraftSuppliesP);
                     
@@ -326,7 +328,7 @@ const showCrafts = async() =>
 
                 const expandedImage = document.createElement("img");
                 expandedImage.classList.add("expanded-craft-image");
-                expandedImage.src = "images/" + craftsJSON[i].image;
+                expandedImage.src = "images/" + craft.image;
                 expandedImageSection.append(expandedImage);
 
                 editPencilLink.onclick = showAddCraftForm;
@@ -350,7 +352,7 @@ const showCrafts = async() =>
         if(i % 4 == 3)
         {
             const craftImage = document.createElement("img");
-            craftImage.src = "images/" + craftsJSON[i].image;
+            craftImage.src = "images/" + craft.image;
             craftImage.classList.add("initial-image-preview");
 
             // Appends to craftSection2
@@ -369,7 +371,7 @@ const showCrafts = async() =>
 
                 const expandedCraftNameh3 = document.createElement("h2");
                 expandedCraftNameh3.classList.add("inline");
-                expandedCraftNameh3.innerHTML = craftsJSON[i].name;
+                expandedCraftNameh3.innerHTML = craft.name;
                 expandedInfoSection.append(expandedCraftNameh3);
 
                 const editPencilLink = document.createElement("a");
@@ -383,7 +385,7 @@ const showCrafts = async() =>
                 deleteXLink.id = "delete-x-link";
 
                 const expandedCraftDescriptionP = document.createElement("p");
-                expandedCraftDescriptionP.innerHTML = craftsJSON[i].description;
+                expandedCraftDescriptionP.innerHTML = craft.description;
                 expandedInfoSection.append(expandedCraftDescriptionP);
 
                 const expandedCraftSuppliesTitle = document.createElement("h3")
@@ -392,11 +394,11 @@ const showCrafts = async() =>
 
                 const expandedCraftSuppliesUl = document.createElement("ul");
                 
-                for(let i=0; i<craftsJSON[i].supplies.length; i++)
+                for(let i=0; i<craft.supplies.length; i++)
                 {
                     const expandedCraftSuppliesP = document.createElement("li");
 
-                    expandedCraftSuppliesP.append(craftsJSON[i].supplies[i]);
+                    expandedCraftSuppliesP.append(craft.supplies[i]);
                     
                     expandedCraftSuppliesUl.append(expandedCraftSuppliesP);
                     
@@ -410,7 +412,7 @@ const showCrafts = async() =>
 
                 const expandedImage = document.createElement("img");
                 expandedImage.classList.add("expanded-craft-image");
-                expandedImage.src = "images/" + craftsJSON[i].image;
+                expandedImage.src = "images/" + craft.image;
                 expandedImageSection.append(expandedImage);
 
                 editPencilLink.onclick = showAddCraftForm;
