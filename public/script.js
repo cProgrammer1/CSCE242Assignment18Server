@@ -94,7 +94,7 @@ const showCrafts = async() =>
     {
 
         // If craft ID has a remainder of 0 when divided by 4, places the craft in the section section (craftSection0) 
-        if(craft._id % 4 == 0)
+        if(craft._id.includes("ObjectId"))
         {
             const craftImage = document.createElement("img");
             craftImage.src = "images/" + craft.image;
