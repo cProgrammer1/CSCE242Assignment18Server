@@ -78,7 +78,7 @@ mongoose
 // Creates new schema (format for parameters) for crafts 
 const craftSchema = new mongoose.Schema
 ({
-    id: Number,
+    id: String,
     name: String,
     description: String,
     supplies: [String],
@@ -163,7 +163,7 @@ app.post("/api/crafts", upload.single("image_input"), async (request, response) 
     const newCraft = new Craft
     ({
         // _id: crafts.length,
-        _id: ObjectId(request.params.id),
+        _id: ObjectId(request.params.id.toString()),
         name: request.body.name_input,
         description: request.body.description_input,
         supplies: request.body.supplies.split(",") // Splits comma-separated items in array 
