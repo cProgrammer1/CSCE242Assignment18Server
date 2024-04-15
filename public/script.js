@@ -91,352 +91,346 @@ const showCrafts = async() =>
 
 
     // Sorts crafts into their respective columns for appearing as responsive images 
-    
-    craftsJSON.forEach((craft) => 
+
+    for(let i=0; i<craftsJSON.length; i++)
     {
-
-        for(let i=0; i<craftsJSON.length; i++)
+        // If craft ID has a remainder of 0 when divided by 4, places the craft in the section section (craftSection0) 
+        if(i % 4 == 0)
         {
-            // If craft ID has a remainder of 0 when divided by 4, places the craft in the section section (craftSection0) 
-            if(i % 4 == 0)
+            const craftImage = document.createElement("img");
+            craftImage.src = "images/" + craftsJSON[i].image;
+            craftImage.classList.add("initial-image-preview");
+
+            // Appends to craftSection0 
+            craftSection0.append(craftImage);
+
+            craftImage.onclick = (event) =>
             {
-                const craftImage = document.createElement("img");
-                craftImage.src = "images/" + craft.image;
-                craftImage.classList.add("initial-image-preview");
+                // FOR TESTING: console.log("Clicked");
 
-                // Appends to craftSection0 
-                craftSection0.append(craftImage);
+                // document.getElementById("crafts-modal").style.display = "block";
+                openCraftsModal("expanded-image-section");
+                openCraftsModal("expanded-info-section");
 
-                craftImage.onclick = (event) =>
+                const expandedInfoSection = document.getElementById("expanded-info-section");
+                expandedInfoSection.innerHTML = "";
+
+                const expandedCraftNameh3 = document.createElement("h2");
+                expandedCraftNameh3.classList.add("inline");
+                expandedCraftNameh3.innerHTML = craftsJSON[i].name;
+                expandedInfoSection.append(expandedCraftNameh3);
+
+                const editPencilLink = document.createElement("a");
+                editPencilLink.innerHTML = "&#9998;";
+                expandedInfoSection.append(editPencilLink);
+                editPencilLink.id = "edit-pencil-image";
+
+                const deleteXLink = document.createElement("a");
+                deleteXLink.innerHTML = "X";
+                expandedInfoSection.append(deleteXLink);
+                deleteXLink.id = "delete-x-link";
+
+                const expandedCraftDescriptionP = document.createElement("p");
+                expandedCraftDescriptionP.innerHTML = craftsJSON[i].description;
+                expandedInfoSection.append(expandedCraftDescriptionP);
+
+                const expandedCraftSuppliesTitle = document.createElement("h3")
+                expandedCraftSuppliesTitle.innerHTML = "Supplies:"
+                expandedInfoSection.append(expandedCraftSuppliesTitle);
+
+                const expandedCraftSuppliesUl = document.createElement("ul");
+                
+                for(let i=0; i<craftsJSON[i].supplies.length; i++)
                 {
-                    // FOR TESTING: console.log("Clicked");
+                    const expandedCraftSuppliesP = document.createElement("li");
 
-                    // document.getElementById("crafts-modal").style.display = "block";
-                    openCraftsModal("expanded-image-section");
-                    openCraftsModal("expanded-info-section");
-
-                    const expandedInfoSection = document.getElementById("expanded-info-section");
-                    expandedInfoSection.innerHTML = "";
-
-                    const expandedCraftNameh3 = document.createElement("h2");
-                    expandedCraftNameh3.classList.add("inline");
-                    expandedCraftNameh3.innerHTML = craft.name;
-                    expandedInfoSection.append(expandedCraftNameh3);
-
-                    const editPencilLink = document.createElement("a");
-                    editPencilLink.innerHTML = "&#9998;";
-                    expandedInfoSection.append(editPencilLink);
-                    editPencilLink.id = "edit-pencil-image";
-
-                    const deleteXLink = document.createElement("a");
-                    deleteXLink.innerHTML = "X";
-                    expandedInfoSection.append(deleteXLink);
-                    deleteXLink.id = "delete-x-link";
-
-                    const expandedCraftDescriptionP = document.createElement("p");
-                    expandedCraftDescriptionP.innerHTML = craft.description;
-                    expandedInfoSection.append(expandedCraftDescriptionP);
-
-                    const expandedCraftSuppliesTitle = document.createElement("h3")
-                    expandedCraftSuppliesTitle.innerHTML = "Supplies:"
-                    expandedInfoSection.append(expandedCraftSuppliesTitle);
-
-                    const expandedCraftSuppliesUl = document.createElement("ul");
+                    expandedCraftSuppliesP.append(craftsJSON[i].supplies[i]);
                     
-                    for(let i=0; i<craft.supplies.length; i++)
-                    {
-                        const expandedCraftSuppliesP = document.createElement("li");
-
-                        expandedCraftSuppliesP.append(craft.supplies[i]);
-                        
-                        expandedCraftSuppliesUl.append(expandedCraftSuppliesP);
-                        
-                    };
+                    expandedCraftSuppliesUl.append(expandedCraftSuppliesP);
                     
-                    expandedInfoSection.append(expandedCraftSuppliesUl);
-
-
-                    const expandedImageSection = document.getElementById("expanded-image-section");
-                    expandedImageSection.innerHTML = "";
-
-                    const expandedImage = document.createElement("img");
-                    expandedImage.classList.add("expanded-craft-image");
-                    expandedImage.src = "images/" + craft.image;
-                    expandedImageSection.append(expandedImage);
-
-                    editPencilLink.onclick = showAddCraftForm;
-                    
-                    deleteXLink.onclick = (event) => 
-                    {
-                        event.preventDefault();
-                        console.log("deleteXLink clicked")
-
-                        deleteCraftPrompt(craft);
-
-                    } 
-
-                    populateCraftEditForm(craft);
-
                 };
+                
+                expandedInfoSection.append(expandedCraftSuppliesUl);
 
-            }
 
-            
-            // If craft ID has a remainder of 1 when divided by 4, places the craft in the section section (craftSection1) 
-            if(i % 4 == 1)
-            {
-                const craftImage = document.createElement("img");
-                craftImage.src = "images/" + craft.image;
-                craftImage.classList.add("initial-image-preview");
+                const expandedImageSection = document.getElementById("expanded-image-section");
+                expandedImageSection.innerHTML = "";
 
-                // Appends to craftSection1 
-                craftSection1.append(craftImage);
+                const expandedImage = document.createElement("img");
+                expandedImage.classList.add("expanded-craft-image");
+                expandedImage.src = "images/" + craftsJSON[i].image;
+                expandedImageSection.append(expandedImage);
 
-                craftImage.onclick = (event) =>
+                editPencilLink.onclick = showAddCraftForm;
+                
+                deleteXLink.onclick = (event) => 
                 {
-                    // FOR TESTING: console.log("Clicked");
+                    event.preventDefault();
+                    console.log("deleteXLink clicked")
 
-                    // document.getElementById("crafts-modal").style.display = "block";
-                    openCraftsModal("expanded-image-section");
-                    openCraftsModal("expanded-info-section");
+                    deleteCraftPrompt(craftsJSON[i]);
 
-                    const expandedInfoSection = document.getElementById("expanded-info-section");
-                    expandedInfoSection.innerHTML = "";
+                } 
 
-                    const expandedCraftNameh3 = document.createElement("h2");
-                    expandedCraftNameh3.classList.add("inline");
-                    expandedCraftNameh3.innerHTML = craft.name;
-                    expandedInfoSection.append(expandedCraftNameh3);
+                populateCraftEditForm(craftsJSON[i]);
 
-                    const editPencilLink = document.createElement("a");
-                    editPencilLink.innerHTML = "&#9998;";
-                    expandedInfoSection.append(editPencilLink);
-                    editPencilLink.id = "edit-pencil-image";
-
-                    const deleteXLink = document.createElement("a");
-                    deleteXLink.innerHTML = "X";
-                    expandedInfoSection.append(deleteXLink);
-                    deleteXLink.id = "delete-x-link";
-
-                    const expandedCraftDescriptionP = document.createElement("p");
-                    expandedCraftDescriptionP.innerHTML = craft.description;
-                    expandedInfoSection.append(expandedCraftDescriptionP);
-
-                    const expandedCraftSuppliesTitle = document.createElement("h3")
-                    expandedCraftSuppliesTitle.innerHTML = "Supplies:"
-                    expandedInfoSection.append(expandedCraftSuppliesTitle);
-
-                    const expandedCraftSuppliesUl = document.createElement("ul");
-                    
-                    for(let i=0; i<craft.supplies.length; i++)
-                    {
-                        const expandedCraftSuppliesP = document.createElement("li");
-
-                        expandedCraftSuppliesP.append(craft.supplies[i]);
-                        
-                        expandedCraftSuppliesUl.append(expandedCraftSuppliesP);
-                        
-                    };
-                    
-                    expandedInfoSection.append(expandedCraftSuppliesUl);
-
-
-                    const expandedImageSection = document.getElementById("expanded-image-section");
-                    expandedImageSection.innerHTML = "";
-
-                    const expandedImage = document.createElement("img");
-                    expandedImage.classList.add("expanded-craft-image");
-                    expandedImage.src = "images/" + craft.image;
-                    expandedImageSection.append(expandedImage);
-
-                    editPencilLink.onclick = showAddCraftForm;
-                    
-                    deleteXLink.onclick = (event) => 
-                    {
-                        event.preventDefault();
-                        console.log("deleteXLink clicked")
-
-                        deleteCraftPrompt(craft);
-
-                    } 
-
-                    populateCraftEditForm(craft);
-
-                };
-
-            }
-
-            // If craft ID has a remainder of 2 when divided by 4, places the craft in the section section (craftSection2) 
-            if(i % 4 == 2)
-            {
-                const craftImage = document.createElement("img");
-                craftImage.src = "images/" + craft.image;
-                craftImage.classList.add("initial-image-preview");
-
-                // Appends to craftSection1 
-                craftSection2.append(craftImage);
-
-                craftImage.onclick = (event) =>
-                {
-                    // FOR TESTING: console.log("Clicked");
-
-                    // document.getElementById("crafts-modal").style.display = "block";
-                    openCraftsModal("expanded-image-section");
-                    openCraftsModal("expanded-info-section");
-
-                    const expandedInfoSection = document.getElementById("expanded-info-section");
-                    expandedInfoSection.innerHTML = "";
-
-                    const expandedCraftNameh3 = document.createElement("h2");
-                    expandedCraftNameh3.classList.add("inline");
-                    expandedCraftNameh3.innerHTML = craft.name;
-                    expandedInfoSection.append(expandedCraftNameh3);
-
-                    const editPencilLink = document.createElement("a");
-                    editPencilLink.innerHTML = "&#9998;";
-                    expandedInfoSection.append(editPencilLink);
-                    editPencilLink.id = "edit-pencil-image";
-
-                    const deleteXLink = document.createElement("a");
-                    deleteXLink.innerHTML = "X";
-                    expandedInfoSection.append(deleteXLink);
-                    deleteXLink.id = "delete-x-link";
-
-                    const expandedCraftDescriptionP = document.createElement("p");
-                    expandedCraftDescriptionP.innerHTML = craft.description;
-                    expandedInfoSection.append(expandedCraftDescriptionP);
-
-                    const expandedCraftSuppliesTitle = document.createElement("h3")
-                    expandedCraftSuppliesTitle.innerHTML = "Supplies:"
-                    expandedInfoSection.append(expandedCraftSuppliesTitle);
-
-                    const expandedCraftSuppliesUl = document.createElement("ul");
-                    
-                    for(let i=0; i<craft.supplies.length; i++)
-                    {
-                        const expandedCraftSuppliesP = document.createElement("li");
-
-                        expandedCraftSuppliesP.append(craft.supplies[i]);
-                        
-                        expandedCraftSuppliesUl.append(expandedCraftSuppliesP);
-                        
-                    };
-                    
-                    expandedInfoSection.append(expandedCraftSuppliesUl);
-
-
-                    const expandedImageSection = document.getElementById("expanded-image-section");
-                    expandedImageSection.innerHTML = "";
-
-                    const expandedImage = document.createElement("img");
-                    expandedImage.classList.add("expanded-craft-image");
-                    expandedImage.src = "images/" + craft.image;
-                    expandedImageSection.append(expandedImage);
-
-                    editPencilLink.onclick = showAddCraftForm;
-                    
-                    deleteXLink.onclick = (event) => 
-                    {
-                        event.preventDefault();
-                        console.log("deleteXLink clicked")
-
-                        deleteCraftPrompt(craft);
-
-                    } 
-
-                    populateCraftEditForm(craft);
-
-                };
-
-            }
-
-            // If craft ID has a remainder of 3 when divided by 4, places the craft in the section section (craftSection3) 
-            if(i % 4 == 3)
-            {
-                const craftImage = document.createElement("img");
-                craftImage.src = "images/" + craft.image;
-                craftImage.classList.add("initial-image-preview");
-
-                // Appends to craftSection2
-                craftSection3.append(craftImage);
-
-                craftImage.onclick = (event) =>
-                {
-                    // FOR TESTING: console.log("Clicked");
-
-                    // document.getElementById("crafts-modal").style.display = "block";
-                    openCraftsModal("expanded-image-section");
-                    openCraftsModal("expanded-info-section");
-
-                    const expandedInfoSection = document.getElementById("expanded-info-section");
-                    expandedInfoSection.innerHTML = "";
-
-                    const expandedCraftNameh3 = document.createElement("h2");
-                    expandedCraftNameh3.classList.add("inline");
-                    expandedCraftNameh3.innerHTML = craft.name;
-                    expandedInfoSection.append(expandedCraftNameh3);
-
-                    const editPencilLink = document.createElement("a");
-                    editPencilLink.innerHTML = "&#9998;";
-                    expandedInfoSection.append(editPencilLink);
-                    editPencilLink.id = "edit-pencil-image";
-
-                    const deleteXLink = document.createElement("a");
-                    deleteXLink.innerHTML = "X";
-                    expandedInfoSection.append(deleteXLink);
-                    deleteXLink.id = "delete-x-link";
-
-                    const expandedCraftDescriptionP = document.createElement("p");
-                    expandedCraftDescriptionP.innerHTML = craft.description;
-                    expandedInfoSection.append(expandedCraftDescriptionP);
-
-                    const expandedCraftSuppliesTitle = document.createElement("h3")
-                    expandedCraftSuppliesTitle.innerHTML = "Supplies:"
-                    expandedInfoSection.append(expandedCraftSuppliesTitle);
-
-                    const expandedCraftSuppliesUl = document.createElement("ul");
-                    
-                    for(let i=0; i<craft.supplies.length; i++)
-                    {
-                        const expandedCraftSuppliesP = document.createElement("li");
-
-                        expandedCraftSuppliesP.append(craft.supplies[i]);
-                        
-                        expandedCraftSuppliesUl.append(expandedCraftSuppliesP);
-                        
-                    };
-                    
-                    expandedInfoSection.append(expandedCraftSuppliesUl);
-
-
-                    const expandedImageSection = document.getElementById("expanded-image-section");
-                    expandedImageSection.innerHTML = "";
-
-                    const expandedImage = document.createElement("img");
-                    expandedImage.classList.add("expanded-craft-image");
-                    expandedImage.src = "images/" + craft.image;
-                    expandedImageSection.append(expandedImage);
-
-                    editPencilLink.onclick = showAddCraftForm;
-                    
-                    deleteXLink.onclick = (event) => 
-                    {
-                        event.preventDefault();
-                        console.log("deleteXLink clicked")
-
-                        deleteCraftPrompt(craft);
-
-                    } 
-
-                    populateCraftEditForm(craft);
-
-                };
-
-            }
+            };
 
         }
 
-    });
+        // If craft ID has a remainder of 1 when divided by 4, places the craft in the section section (craftSection1) 
+        if(i % 4 == 1)
+        {
+            const craftImage = document.createElement("img");
+            craftImage.src = "images/" + craftsJSON[i].image;
+            craftImage.classList.add("initial-image-preview");
+
+            // Appends to craftSection1 
+            craftSection1.append(craftImage);
+
+            craftImage.onclick = (event) =>
+            {
+                // FOR TESTING: console.log("Clicked");
+
+                // document.getElementById("crafts-modal").style.display = "block";
+                openCraftsModal("expanded-image-section");
+                openCraftsModal("expanded-info-section");
+
+                const expandedInfoSection = document.getElementById("expanded-info-section");
+                expandedInfoSection.innerHTML = "";
+
+                const expandedCraftNameh3 = document.createElement("h2");
+                expandedCraftNameh3.classList.add("inline");
+                expandedCraftNameh3.innerHTML = craftsJSON[i].name;
+                expandedInfoSection.append(expandedCraftNameh3);
+
+                const editPencilLink = document.createElement("a");
+                editPencilLink.innerHTML = "&#9998;";
+                expandedInfoSection.append(editPencilLink);
+                editPencilLink.id = "edit-pencil-image";
+
+                const deleteXLink = document.createElement("a");
+                deleteXLink.innerHTML = "X";
+                expandedInfoSection.append(deleteXLink);
+                deleteXLink.id = "delete-x-link";
+
+                const expandedCraftDescriptionP = document.createElement("p");
+                expandedCraftDescriptionP.innerHTML = craftsJSON[i].description;
+                expandedInfoSection.append(expandedCraftDescriptionP);
+
+                const expandedCraftSuppliesTitle = document.createElement("h3")
+                expandedCraftSuppliesTitle.innerHTML = "Supplies:"
+                expandedInfoSection.append(expandedCraftSuppliesTitle);
+
+                const expandedCraftSuppliesUl = document.createElement("ul");
+                
+                for(let i=0; i<craftsJSON[i].supplies.length; i++)
+                {
+                    const expandedCraftSuppliesP = document.createElement("li");
+
+                    expandedCraftSuppliesP.append(craftsJSON[i].supplies[i]);
+                    
+                    expandedCraftSuppliesUl.append(expandedCraftSuppliesP);
+                    
+                };
+                
+                expandedInfoSection.append(expandedCraftSuppliesUl);
+
+
+                const expandedImageSection = document.getElementById("expanded-image-section");
+                expandedImageSection.innerHTML = "";
+
+                const expandedImage = document.createElement("img");
+                expandedImage.classList.add("expanded-craft-image");
+                expandedImage.src = "images/" + craftsJSON[i].image;
+                expandedImageSection.append(expandedImage);
+
+                editPencilLink.onclick = showAddCraftForm;
+                
+                deleteXLink.onclick = (event) => 
+                {
+                    event.preventDefault();
+                    console.log("deleteXLink clicked")
+
+                    deleteCraftPrompt(craftsJSON[i]);
+
+                } 
+
+                populateCraftEditForm(craftsJSON[i]);
+
+            };
+
+        }
+
+        // If craft ID has a remainder of 2 when divided by 4, places the craft in the section section (craftSection2) 
+        if(i % 4 == 2)
+        {
+            const craftImage = document.createElement("img");
+            craftImage.src = "images/" + craftsJSON[i].image;
+            craftImage.classList.add("initial-image-preview");
+
+            // Appends to craftSection1 
+            craftSection2.append(craftImage);
+
+            craftImage.onclick = (event) =>
+            {
+                // FOR TESTING: console.log("Clicked");
+
+                // document.getElementById("crafts-modal").style.display = "block";
+                openCraftsModal("expanded-image-section");
+                openCraftsModal("expanded-info-section");
+
+                const expandedInfoSection = document.getElementById("expanded-info-section");
+                expandedInfoSection.innerHTML = "";
+
+                const expandedCraftNameh3 = document.createElement("h2");
+                expandedCraftNameh3.classList.add("inline");
+                expandedCraftNameh3.innerHTML = craftsJSON[i].name;
+                expandedInfoSection.append(expandedCraftNameh3);
+
+                const editPencilLink = document.createElement("a");
+                editPencilLink.innerHTML = "&#9998;";
+                expandedInfoSection.append(editPencilLink);
+                editPencilLink.id = "edit-pencil-image";
+
+                const deleteXLink = document.createElement("a");
+                deleteXLink.innerHTML = "X";
+                expandedInfoSection.append(deleteXLink);
+                deleteXLink.id = "delete-x-link";
+
+                const expandedCraftDescriptionP = document.createElement("p");
+                expandedCraftDescriptionP.innerHTML = craftsJSON[i].description;
+                expandedInfoSection.append(expandedCraftDescriptionP);
+
+                const expandedCraftSuppliesTitle = document.createElement("h3")
+                expandedCraftSuppliesTitle.innerHTML = "Supplies:"
+                expandedInfoSection.append(expandedCraftSuppliesTitle);
+
+                const expandedCraftSuppliesUl = document.createElement("ul");
+                
+                for(let i=0; i<craftsJSON[i].supplies.length; i++)
+                {
+                    const expandedCraftSuppliesP = document.createElement("li");
+
+                    expandedCraftSuppliesP.append(craftsJSON[i].supplies[i]);
+                    
+                    expandedCraftSuppliesUl.append(expandedCraftSuppliesP);
+                    
+                };
+                
+                expandedInfoSection.append(expandedCraftSuppliesUl);
+
+
+                const expandedImageSection = document.getElementById("expanded-image-section");
+                expandedImageSection.innerHTML = "";
+
+                const expandedImage = document.createElement("img");
+                expandedImage.classList.add("expanded-craft-image");
+                expandedImage.src = "images/" + craftsJSON[i].image;
+                expandedImageSection.append(expandedImage);
+
+                editPencilLink.onclick = showAddCraftForm;
+                
+                deleteXLink.onclick = (event) => 
+                {
+                    event.preventDefault();
+                    console.log("deleteXLink clicked")
+
+                    deleteCraftPrompt(craft);
+
+                } 
+
+                populateCraftEditForm(craft);
+
+            };
+
+        }
+
+        // If craft ID has a remainder of 3 when divided by 4, places the craft in the section section (craftSection3) 
+        if(i % 4 == 3)
+        {
+            const craftImage = document.createElement("img");
+            craftImage.src = "images/" + craftsJSON[i].image;
+            craftImage.classList.add("initial-image-preview");
+
+            // Appends to craftSection2
+            craftSection3.append(craftImage);
+
+            craftImage.onclick = (event) =>
+            {
+                // FOR TESTING: console.log("Clicked");
+
+                // document.getElementById("crafts-modal").style.display = "block";
+                openCraftsModal("expanded-image-section");
+                openCraftsModal("expanded-info-section");
+
+                const expandedInfoSection = document.getElementById("expanded-info-section");
+                expandedInfoSection.innerHTML = "";
+
+                const expandedCraftNameh3 = document.createElement("h2");
+                expandedCraftNameh3.classList.add("inline");
+                expandedCraftNameh3.innerHTML = craftsJSON[i].name;
+                expandedInfoSection.append(expandedCraftNameh3);
+
+                const editPencilLink = document.createElement("a");
+                editPencilLink.innerHTML = "&#9998;";
+                expandedInfoSection.append(editPencilLink);
+                editPencilLink.id = "edit-pencil-image";
+
+                const deleteXLink = document.createElement("a");
+                deleteXLink.innerHTML = "X";
+                expandedInfoSection.append(deleteXLink);
+                deleteXLink.id = "delete-x-link";
+
+                const expandedCraftDescriptionP = document.createElement("p");
+                expandedCraftDescriptionP.innerHTML = craftsJSON[i].description;
+                expandedInfoSection.append(expandedCraftDescriptionP);
+
+                const expandedCraftSuppliesTitle = document.createElement("h3")
+                expandedCraftSuppliesTitle.innerHTML = "Supplies:"
+                expandedInfoSection.append(expandedCraftSuppliesTitle);
+
+                const expandedCraftSuppliesUl = document.createElement("ul");
+                
+                for(let i=0; i<craftsJSON[i].supplies.length; i++)
+                {
+                    const expandedCraftSuppliesP = document.createElement("li");
+
+                    expandedCraftSuppliesP.append(craftsJSON[i].supplies[i]);
+                    
+                    expandedCraftSuppliesUl.append(expandedCraftSuppliesP);
+                    
+                };
+                
+                expandedInfoSection.append(expandedCraftSuppliesUl);
+
+
+                const expandedImageSection = document.getElementById("expanded-image-section");
+                expandedImageSection.innerHTML = "";
+
+                const expandedImage = document.createElement("img");
+                expandedImage.classList.add("expanded-craft-image");
+                expandedImage.src = "images/" + craftsJSON[i].image;
+                expandedImageSection.append(expandedImage);
+
+                editPencilLink.onclick = showAddCraftForm;
+                
+                deleteXLink.onclick = (event) => 
+                {
+                    event.preventDefault();
+                    console.log("deleteXLink clicked")
+
+                    deleteCraftPrompt(craft);
+
+                } 
+
+                populateCraftEditForm(craft);
+
+            };
+
+        }
+
+    }
 
 };
 
