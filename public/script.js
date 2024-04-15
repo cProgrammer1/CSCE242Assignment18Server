@@ -869,7 +869,7 @@ const showCrafts = async() =>
 
     // });
 
-};
+
 
 // Populates the edit form when the edit pencil is clicked 
 populateCraftEditForm = (craft) =>
